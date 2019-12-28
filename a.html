@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Functional programming</title>
+</head>
+<body>
+    <script>
+        // Higher order functions: Function inside function
+         //  A function which takes another function as parameter or returns a function as parameter
+         //The parameter is called a call back function
+         // cube : n *n *n
+         //const square = (n) => n * n
+         
+         /*const cube = (square, n) => {
+          return square(n) * n
+         }*/
+         const square = (n) => n * n
+         const cubes = (n) => n * n *n
+         
+         const cube = (callback, n) => {
+          return callback(n) * n
+         }
+         console.log(cube(square,2))
+         const addTen = (n) => n + 10
+         const cube1 = (callback, n) => {
+             return callback(n+5) * n
+         }
+         console.log(cube1(addTen, 2))
+         
+         const solveEquation = (callback1, callback2, n) => {
+             return callback1 (n) - callback2 (n) + 1
+         }
+         console.log(solveEquation(cubes, square, 2))
+         /* function cube (callback, n) {
+             }
+             */
+        //nameOfFunction (3)(2)
+        const higherOrderFunction = (n) => {
+            const doSomething = (m) => m + n + 1
+            return doSomething
+        }
+        console.log(higherOrderFunction(2)(3))
+            const higherOrderFunction1 = (n) => {
+            const doSomething1 = (m) => {
+                const doWhatEver1 = (t) => {
+                    return 2 * n + 3*m + 1
+                }
+                return doWhatEver1
+            }
+            return doSomething1
+        }
+        console.log(higherOrderFunction1(2)(3)(5))
+        //for each
+        /*const numbers = [1,2,3,4]
+        numbers.forEach(function(index, item) {
+            console.log(index, item)
+        })*/
+        const numbers = [1,2,3,4]
+        const SumOfArrays = (array) => {
+        let sum = 0
+       numbers.forEach(function(item, index, array) {
+            console.log(item, index, array)
+            sum = sum+item
+        })
+        return sum
+    }
+       
+        
+        console.log(SumOfArrays(numbers))
+        const countries = ['Finland', 'Estonia', 'Sweden', 'Norway']
+        const CapitalizeCountry = (array) =>{
+        const NewArray = []
+       // countries.forEach(array)
+         /*for(let i = 0; i<array.length; i++) {
+             NewArray.push(array[i].toUpperCase())
+         }
+         return NewArray*/
+         for(const element of array) {
+             console.log(element)
+            NewArray.push(element.toUpperCase())
+         }
+         return NewArray
+         /*array.forEach(element => NewArray.push(element.toUpperCase()))
+         return NewArray*/
+        }
+        
+        console.log(CapitalizeCountry(countries))
+        //map, filter, reduce, some, every, find
+        const capital = countries.map(function(element){
+            return element.toUpperCase()
+        }) 
+        console.log('Capital is ', capital)
+        const squareNum = numbers.map(function(n) {
+            return n*n
+        })
+        console.log(squareNum)
+        const cubeNum = numbers.map((n) => n*n*n)
+        console.log(cubeNum)
+        const products = [{product: 'banana', price: 3},
+                          {product: 'mango', price: 6},
+                          {product: 'avacado', price: 8},
+                          {product: 'coffee', price: 10}]
+        const prices = products.map(function (item) {
+            return item.price
+        })    
+        console.log('prices are ', prices)    
+        const nums = [1, 4, 9, 16] 
+        const reducer = (accumulator, current) => accumulator + current
+        const total1 = nums.reduce(reducer)
+       //let i = 1
+       const total = prices.reduce(function(accumValue, currValue) {
+            return accumValue + currValue
+        })   
+        console.log('total is', total)      
+        console.log('total1 is ' , total1)
+        const totalCountries = countries.reduce(function(accumValue, currValue) {
+            return accumValue + ', ' + currValue
+        })      
+        console.log('countries are ', totalCountries)
+        //Filter : filters out items based on criteria
+        const filter_country = countries.filter(function (country) {
+            return !country.includes('land')
+        })
+        console.log(filter_country)
+        const wholeNumbers = [0,1,2,3,4,5,6,7,8,9,10,11]
+        const evens = wholeNumbers.filter((evenNum) =>evenNum%2==0)
+        console.log(evens)
+    </script>
+</body>
+</html>
